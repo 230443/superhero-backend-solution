@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -31,8 +32,8 @@ public class MissionControllerCreateMissionTest {
 				.content("{\"missionName\":\" \"}")
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isBadRequest());
-				//.andExpect(MockMvcResultMatchers.content().);
+				.andExpect(MockMvcResultMatchers.status().isBadRequest())
+				.andExpect(MockMvcResultMatchers.content().string(containsString("missionName must not be blank")));
 	}
 
 	@Test
