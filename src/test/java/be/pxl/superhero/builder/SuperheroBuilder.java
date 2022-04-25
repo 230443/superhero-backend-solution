@@ -6,14 +6,20 @@ public final class SuperheroBuilder {
 	public static final String FIRSTNAME = "Clark";
 	public static final String LASTNAME = "Kent";
 	public static final String SUPERHERO_NAME = "Superman";
+	public static final Long SUPERHERO_ID = 15L;
 	private String firstName = FIRSTNAME;
 	private String lastName = LASTNAME;
 	private String superheroName = SUPERHERO_NAME;
+	private Long id = SUPERHERO_ID;
 
 	private SuperheroBuilder() {}
 
 	public static SuperheroBuilder aSuperhero() {return new SuperheroBuilder();}
 
+	public SuperheroBuilder withId(Long id) {
+		this.id = id;
+		return this;
+	}
 	public SuperheroBuilder withFirstName(String firstName) {
 		this.firstName = firstName;
 		return this;
