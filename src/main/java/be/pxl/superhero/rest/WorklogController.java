@@ -35,7 +35,7 @@ public class WorklogController {
 
 	@GetMapping("/submit")
 	public String submitWorkload(Model model) {
-		List<MissionDTO> missions = missionService.findAllMissions();
+		List<MissionDTO> missions = missionService.findActiveMissions();
 		model.addAttribute("missions", missions);
 		model.addAttribute("worklogForm", new WorklogForm());
 		System.out.println(missions);

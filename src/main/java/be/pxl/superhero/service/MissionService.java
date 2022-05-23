@@ -11,6 +11,8 @@ public interface MissionService {
 
 	List<MissionDTO> findAllMissions();
 
+	List<MissionDTO> findActiveMissions();
+
 	MissionDetailDTO findMissionById(Long missionId);
 
 	MissionDTO createMission(CreateMissionRequest missionRequest);

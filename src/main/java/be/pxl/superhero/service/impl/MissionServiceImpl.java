@@ -33,6 +33,15 @@ public class MissionServiceImpl implements MissionService {
 	}
 
 	@Override
+	public List<MissionDTO> findActiveMissions() {
+		return missionRepository
+				.findMissionsByCompletedFalseAndDeletedFalse()
+				.stream()
+				.map(MissionDTO::new)
+				.collect(Collectors.toList());
+	}
+
+	@Override
 	public MissionDetailDTO findMissionById(Long missionId) {
 		return missionRepository.findById(missionId).map(MissionDetailDTO::new).orElseThrow(() -> new ResourceNotFoundException("Mission", "ID", missionId));
 	}
