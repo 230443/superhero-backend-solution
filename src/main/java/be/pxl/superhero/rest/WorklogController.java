@@ -1,11 +1,13 @@
 package be.pxl.superhero.rest;
 
 import be.pxl.superhero.api.MissionDTO;
+import be.pxl.superhero.api.WorklogForm;
 import be.pxl.superhero.service.MissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public class WorklogController {
 
 
 	private final MissionService missionService;
-	private final Logger logger = Logger.getLogger(WorklogController.class.getName());
+	private final Logger LOGGER = Logger.getLogger(WorklogController.class.getName());
 
 	@Autowired
 	public WorklogController(MissionService missionService) {
@@ -35,7 +37,14 @@ public class WorklogController {
 	public String submitWorkload(Model model) {
 		List<MissionDTO> missions = missionService.findAllMissions();
 		model.addAttribute("missions", missions);
+		model.addAttribute("worklogForm", new WorklogForm());
 		System.out.println(missions);
 		return "submit_worklog";
+	}
+
+	@PostMapping("/submit")
+	public String submitWorkload(WorklogForm worklogForm) {
+		LOGGER.info("Submitting worklog for mission: " + worklogForm.toString());
+		return "redirect:/worklog";
 	}
 }
